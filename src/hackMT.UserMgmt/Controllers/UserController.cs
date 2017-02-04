@@ -11,7 +11,7 @@ namespace hackMT.UserMgmt.Controllers
         static List<User> Users = new List<User>();
         UserRepository repo = new UserRepository();
         [HttpGet()]
-        [Route("api/User/Users")]
+        [Route("users/v1")]
         public List<User> GetAll()
         {
             return repo.GetAllUsers();
@@ -24,7 +24,7 @@ namespace hackMT.UserMgmt.Controllers
         }
 
         [HttpPost()]
-        [Route("users/v1")]
+        [Route("users/v1/")]
         public IActionResult Post([FromBody] User newUser)
         {
             var users = new UserCreateResponse();
