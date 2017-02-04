@@ -18,14 +18,31 @@ namespace hackMT.UserMgmt.Controllers
         }
 
         [HttpPost()]
-        [Route("api/User/User")]
-        public int Post([FromBody] User newUser)
+        [Route("users/v1")]
+        public IActionResult Post([FromBody] User newUser)
         {
-            if (newUser != null)
-            {
-                return repo.AddUser(newUser);
+            var users = new UserCreateResponse();
+            try {
+                if (newUser != null)
+                {
+                    var addUser = repo.AddUser(newUser);
+                    if(addUser > 0)
+                    {
+                        users.message = "user created.";
+                        users.status = "success";                   
+                    }
+                }else{
+                        users.message = "Not a valid user.";
+                        users.status = "failed"; 
+                        return BadRequest(users);
+                }
             }
-            return -1;
+            catch {
+                    users.message = "Something went wrong, please try again.";
+                    users.status = "failed"; 
+                    return BadRequest(users);
+            }
+            return Ok(newUser);
         }
 
         [HttpPut()]

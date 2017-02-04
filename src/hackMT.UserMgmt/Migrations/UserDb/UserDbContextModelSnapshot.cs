@@ -15,9 +15,10 @@ namespace hackMT.UserMgmt.Migrations.UserDb
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");
 
-            modelBuilder.Entity("hackMT.UserMgmt.model.user", b =>
+            modelBuilder.Entity("hackMT.UserMgmt.model.User", b =>
                 {
-                    b.Property<string>("user_id");
+                    b.Property<int>("user_id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("avatar_url");
 
@@ -33,7 +34,7 @@ namespace hackMT.UserMgmt.Migrations.UserDb
 
                     b.HasKey("user_id");
 
-                    b.ToTable("TodoItems");
+                    b.ToTable("User");
                 });
         }
     }

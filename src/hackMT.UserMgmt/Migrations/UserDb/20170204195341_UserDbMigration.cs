@@ -4,15 +4,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace hackMT.UserMgmt.Migrations.UserDb
 {
-    public partial class userMigration : Migration
+    public partial class UserDbMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "TodoItems",
+                name: "User",
                 columns: table => new
                 {
-                    user_id = table.Column<string>(nullable: false),
+                    user_id = table.Column<int>(nullable: false)
+                        .Annotation("Autoincrement", true),
                     avatar_url = table.Column<string>(nullable: true),
                     email = table.Column<string>(nullable: true),
                     new_password = table.Column<string>(nullable: true),
@@ -22,14 +23,14 @@ namespace hackMT.UserMgmt.Migrations.UserDb
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TodoItems", x => x.user_id);
+                    table.PrimaryKey("PK_User", x => x.user_id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TodoItems");
+                name: "User");
         }
     }
 }

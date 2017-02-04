@@ -11,6 +11,12 @@ namespace hackMT.UserMgmt.model
         public string password {get; set; }
         public string old_password {get; set; }
         public string new_password {get; set; }
-        public string avatar_url {get; set; }
+        public string avatar_url {get; set; }   
+    }
+
+    public class UserCreateResponse : User{
+        
+        public string message {get; set; }
+        public string status {get; set; }  
     }
 }
