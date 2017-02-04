@@ -190,8 +190,11 @@
 /Users/Jason/user_management_api/src/hackMT.UserMgmt/Startup.cs
 /Users/Jason/user_management_api/src/hackMT.UserMgmt/TodoItem.cs
 /Users/Jason/user_management_api/src/hackMT.UserMgmt/TodoRepository.cs
+/Users/Jason/user_management_api/src/hackMT.UserMgmt/userContext.cs
 /Users/Jason/user_management_api/src/hackMT.UserMgmt/Controllers/ToDoController.cs
 /Users/Jason/user_management_api/src/hackMT.UserMgmt/Controllers/ValuesController.cs
 /Users/Jason/user_management_api/src/hackMT.UserMgmt/Migrations/20170204034352_FirstMigration.cs
 /Users/Jason/user_management_api/src/hackMT.UserMgmt/Migrations/20170204034352_FirstMigration.Designer.cs
 /Users/Jason/user_management_api/src/hackMT.UserMgmt/Migrations/TodoDbContextModelSnapshot.cs
+/Users/Jason/user_management_api/src/hackMT.UserMgmt/model/user.cs
+/Users/Jason/user_management_api/src/hackMT.UserMgmt/repository/userRepository.cs
