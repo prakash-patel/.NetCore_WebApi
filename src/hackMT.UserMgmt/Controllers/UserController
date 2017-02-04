@@ -1,0 +1,55 @@
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace hackMT.UserMgmt.Controllers
+{
+    public class UserController : Controller
+    {
+        static List<UserItem> UserItems = new List<UserItem>();
+        UserRepository repo = new UserRepository();
+        [HttpGet()]
+        [Route("api/User/items")]
+        public List<UserItem> GetAll()
+        {
+            return repo.GetAllItems();
+        }
+
+        [HttpPost()]
+        [Route("api/User/item")]
+        public int Post([FromBody] UserItem newUser)
+        {
+            if (newUser != null)
+            {
+                return repo.AddItem(newUser);
+            }
+            return -1;
+        }
+
+        [HttpPut()]
+        [Route("api/User/{id}")]
+        public int Put(int id, [FromBody] UserItem itemToUpdate)
+        {
+            return repo.UpdateItem(id, itemToUpdate);
+        }
+
+        [HttpDelete()]
+        [Route("api/User/{id}")]
+        public bool Delete(int id)
+        {
+            bool isDeleteSuccessful = false;
+            try
+            {
+                repo.DeleteItem(id);
+                isDeleteSuccessful = true;
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return isDeleteSuccessful;
+        }
+    }
+}
