@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using hackMT.UserMgmt.Repository;
 using hackMT.UserMgmt.model;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 
 namespace hackMT.UserMgmt.Controllers
@@ -51,11 +52,41 @@ namespace hackMT.UserMgmt.Controllers
             return Ok(newUser);
         }
 
-        [HttpPut()]
-        [Route("api/User/{id}")]
-        public int Put(int id, [FromBody] User UserToUpdate)
+        [HttpPatch] 
+        [Route("users/v1/{id}")]
+        public IActionResult Patch(int id, [FromBody] UpdateUser UserToUpdate) 
         {
-            return repo.UpdateUser(id, UserToUpdate);
+            var response = new UpdateUserResponse(); 
+            try { 
+                    if (UserToUpdate != null) 
+                    { 
+                        var updateUserId = repo.UpdateUser(id, UserToUpdate); 
+                        if(updateUserId > 0) 
+                        { 
+                            response.user_id = updateUserId; 
+                            response.message = "Password successfully changed."; 
+                            response.status = "success";                    
+                        }else{ 
+                            response.user_id = id;
+                            response.message = "Your entry for 'old password' is incorrect."; 
+                            response.status = "failed";  
+                            return BadRequest(response); 
+                        }
+                    }else{ 
+                            response.user_id = id;
+                            response.message = "Your entry for 'old password' is incorrect."; 
+                            response.status = "failed";  
+                            return BadRequest(response); 
+                    } 
+            } 
+            catch { 
+                    response.message = "Something went wrong, please try again."; 
+                    response.status = "failed";  
+                    return BadRequest(response); 
+            } 
+ 
+            return Ok(response); 
+
         }
 
         [HttpGet()]

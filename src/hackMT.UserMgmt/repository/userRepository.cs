@@ -37,15 +37,20 @@ namespace hackMT.UserMgmt.Repository
         }
 
     }
-    public int UpdateUser(int index, User UserToUpdate)
+    public int UpdateUser(int index, UpdateUser UserToUpdate) 
     {
         using (UserDbContext context = new UserDbContext())
         {
-            var updatingUser = context.User.Where(User => User.user_id == index).FirstOrDefault();
-            updatingUser.avatar_url = UserToUpdate.avatar_url;
-            updatingUser.email = UserToUpdate.email;
-            context.SaveChanges();
-            return index;
+            var updatingUser = context.User.Where(User => User.user_id == index).FirstOrDefault(); 
+            if (UserToUpdate.username == updatingUser.username &&  
+                UserToUpdate.old_password == updatingUser.password) 
+            { 
+                updatingUser.password = UserToUpdate.new_password; 
+                context.SaveChanges(); 
+                return index; 
+            }else { 
+                return 0; 
+            } 
         }
     }
     public int DeleteUser(int index)
