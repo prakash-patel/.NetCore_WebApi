@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "7709812ef4ee27e1589ba7ec7932aec8513afefe"
+    "signature": "71e8fe157b5d16dd2bf3878c69724363d95f9286"
   },
   "compilationOptions": {
     "defines": [
@@ -30,7 +30,8 @@
           "Microsoft.Extensions.Logging.Debug": "1.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
           "Microsoft.EntityFrameworkCore.Design": "1.0.0-preview2-final",
-          "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0"
+          "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0",
+          "Microsoft.AspNet.JsonPatch": "1.0.0-rc1-final"
         },
         "runtime": {
           "hackMT.UserMgmt.dll": {}
@@ -84,6 +85,25 @@
         },
         "compile": {
           "lib/netstandard1.6/Microsoft.ApplicationInsights.AspNetCore.dll": {}
+        }
+      },
+      "Microsoft.AspNet.JsonPatch/1.0.0-rc1-final": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.3.0",
+          "Newtonsoft.Json": "9.0.1",
+          "System.Collections.Concurrent": "4.3.0",
+          "System.ComponentModel.TypeConverter": "4.1.0",
+          "System.Globalization": "4.3.0",
+          "System.Reflection.Extensions": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Text.Encoding.Extensions": "4.3.0"
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.AspNet.JsonPatch.dll": {}
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.AspNet.JsonPatch.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/1.0.1": {
@@ -3214,6 +3234,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-t1O4hbatuHU4BJnuBZ4zmx6fNoTryyZO/NwxwqmMUbuHyvil3elkOZvX3pJWlUTOk6/wyRXItGKBiW4uDET6Kw=="
+    },
+    "Microsoft.AspNet.JsonPatch/1.0.0-rc1-final": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ymoIERwLlkXXffpKpFHZ6sjKz8HPwPqAbOnia1H3RAhyTYNJkahW6qWNXF96Fd66I1+m88pApWku+Ld0WD94Sg=="
     },
     "Microsoft.AspNetCore.Antiforgery/1.0.1": {
       "type": "package",
