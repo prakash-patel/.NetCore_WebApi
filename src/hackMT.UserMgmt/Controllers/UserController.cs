@@ -1,38 +1,38 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using hackMT.UserMgmt.Repoitory;
+using hackMT.UserMgmt.model;
 
 namespace hackMT.UserMgmt.Controllers
 {
     public class UserController : Controller
     {
-        static List<UserItem> UserItems = new List<UserItem>();
+        static List<User> Users = new List<User>();
         UserRepository repo = new UserRepository();
         [HttpGet()]
-        [Route("api/User/items")]
-        public List<UserItem> GetAll()
+        [Route("api/User/Users")]
+        public List<User> GetAll()
         {
-            return repo.GetAllItems();
+            return repo.GetAllUsers();
         }
 
         [HttpPost()]
-        [Route("api/User/item")]
-        public int Post([FromBody] UserItem newUser)
+        [Route("api/User/User")]
+        public int Post([FromBody] User newUser)
         {
             if (newUser != null)
             {
-                return repo.AddItem(newUser);
+                return repo.AddUser(newUser);
             }
             return -1;
         }
 
         [HttpPut()]
         [Route("api/User/{id}")]
-        public int Put(int id, [FromBody] UserItem itemToUpdate)
+        public int Put(int id, [FromBody] User UserToUpdate)
         {
-            return repo.UpdateItem(id, itemToUpdate);
+            return repo.UpdateUser(id, UserToUpdate);
         }
 
         [HttpDelete()]
@@ -42,7 +42,7 @@ namespace hackMT.UserMgmt.Controllers
             bool isDeleteSuccessful = false;
             try
             {
-                repo.DeleteItem(id);
+                repo.DeleteUser(id);
                 isDeleteSuccessful = true;
             }
             catch (System.Exception ex)

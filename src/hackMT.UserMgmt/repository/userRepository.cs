@@ -1,10 +1,11 @@
 using System.Linq;
 using System.Collections.Generic;
-using hackMT.UserMgmt;
 using hackMT.UserMgmt.model;
 
-public class UserRepository
+namespace hackMT.UserMgmt.Repoitory
 {
+    public class UserRepository
+    {
     public UserRepository()
     {
 
@@ -48,4 +49,5 @@ public class UserRepository
             return true;
         }
     }
+}
 }
