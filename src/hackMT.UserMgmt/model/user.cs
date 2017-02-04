@@ -2,10 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 namespace hackMT.UserMgmt.model
 {
-     public class user
+     public class User
     {
         [Key]
-        public string user_id { get; set; }
+        public int user_id { get; set; }
         public string username { get; set; }
         public string email { get; set; }
         public string password {get; set; }
