@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using hackMT.UserMgmt.Repository;
 using hackMT.UserMgmt.model;
+using System;
 
 namespace hackMT.UserMgmt.Controllers
 {
@@ -59,20 +59,40 @@ namespace hackMT.UserMgmt.Controllers
         }
 
         [HttpDelete()]
-        [Route("api/User/{id}")]
-        public bool Delete(int id)
+        [Route("users/v1/{id}")]
+        public IActionResult Delete(int id)
         {
-            bool isDeleteSuccessful = false;
-            try
-            {
-                repo.DeleteUser(id);
-                isDeleteSuccessful = true;
+            var users = new DeleteUserResponse();
+            try {
+                if (id > 0)
+                {
+                    var deleteUserId = repo.DeleteUser(id);
+                    if(deleteUserId > 0)
+                    {
+                        users.user_id = deleteUserId;
+                        users.message = "user deleted.";
+                        users.status = "success";                   
+                    }
+                    else{
+                        users.user_id = id;
+                        users.message = "Not a valid user id.";
+                        users.status = "failed"; 
+                        return BadRequest(users);
+                    }
+                }else{
+                        users.user_id = id;
+                        users.message = "Not a valid user id.";
+                        users.status = "failed"; 
+                        return BadRequest(users);
+                }
             }
-            catch (System.Exception ex)
-            {
-                Console.WriteLine(ex);
+            catch {
+                    users.user_id = id;
+                    users.message = "Something went wrong, please try again.";
+                    users.status = "failed"; 
+                    return BadRequest(users);
             }
-            return isDeleteSuccessful;
+            return Ok(users);
         }
     }
 }

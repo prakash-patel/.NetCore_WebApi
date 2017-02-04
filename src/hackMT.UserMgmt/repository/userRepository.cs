@@ -48,14 +48,18 @@ namespace hackMT.UserMgmt.Repository
             return index;
         }
     }
-    public bool DeleteUser(int index)
+    public int DeleteUser(int index)
     {
         using (var context = new UserDbContext())
         {
-            var UserToRemove = context.User.ToList()[index];
-            context.User.Remove(UserToRemove);
-            context.SaveChanges();
-            return true;
+            var UserToRemove = context.User.Where(User => User.user_id == index).FirstOrDefault();
+            if(UserToRemove != null){
+                context.User.Remove(UserToRemove);
+                context.SaveChanges();
+                return index;
+            }else {
+                return 0;
+            }
         }
     }
 }
