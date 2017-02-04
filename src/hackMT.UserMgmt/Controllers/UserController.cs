@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using hackMT.UserMgmt.Repoitory;
+using hackMT.UserMgmt.Repository;
 using hackMT.UserMgmt.model;
 
 namespace hackMT.UserMgmt.Controllers
@@ -15,6 +15,12 @@ namespace hackMT.UserMgmt.Controllers
         public List<User> GetAll()
         {
             return repo.GetAllUsers();
+        }
+
+        [HttpGet()]
+        [Route("users/v1/{id}")]
+        public User GetUser(int id){
+            return repo.GetUser(id);
         }
 
         [HttpPost()]

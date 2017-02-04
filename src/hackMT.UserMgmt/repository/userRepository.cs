@@ -2,7 +2,7 @@ using System.Linq;
 using System.Collections.Generic;
 using hackMT.UserMgmt.model;
 
-namespace hackMT.UserMgmt.Repoitory
+namespace hackMT.UserMgmt.Repository
 {
     public class UserRepository
     {
@@ -27,6 +27,15 @@ namespace hackMT.UserMgmt.Repoitory
         {
             return context.User.ToList();
         }
+    }
+
+    public User GetUser(int userId)
+    {
+        using (UserDbContext context = new UserDbContext())
+        {
+            return context.User.Where(User => User.user_id == userId).FirstOrDefault();
+        }
+
     }
     public int UpdateUser(int index, User UserToUpdate)
     {
