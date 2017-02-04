@@ -196,6 +196,7 @@
 "/Users/Jason/user_management_api/src/hackMT.UserMgmt/Migrations/UserDb/20170204195341_UserDbMigration.cs"
 "/Users/Jason/user_management_api/src/hackMT.UserMgmt/Migrations/UserDb/20170204195341_UserDbMigration.Designer.cs"
 "/Users/Jason/user_management_api/src/hackMT.UserMgmt/Migrations/UserDb/UserDbContextModelSnapshot.cs"
+"/Users/Jason/user_management_api/src/hackMT.UserMgmt/model/apiStatus.cs"
 "/Users/Jason/user_management_api/src/hackMT.UserMgmt/model/deleteUser.cs"
 "/Users/Jason/user_management_api/src/hackMT.UserMgmt/model/user.cs"
 "/Users/Jason/user_management_api/src/hackMT.UserMgmt/repository/userRepository.cs"

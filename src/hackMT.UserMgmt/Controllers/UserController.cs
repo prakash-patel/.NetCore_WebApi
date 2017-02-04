@@ -58,6 +58,16 @@ namespace hackMT.UserMgmt.Controllers
             return repo.UpdateUser(id, UserToUpdate);
         }
 
+        [HttpGet()]
+        [Route("users/v1/status")]
+        public IActionResult apiStatus()
+        {
+            var status = new apiStatus();
+                status.status = "online";
+                status.user_count = repo.GetAllUsers().Count;
+            return Ok(status);
+        }
+
         [HttpDelete()]
         [Route("users/v1/{id}")]
         public IActionResult Delete(int id)
