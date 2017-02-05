@@ -12,6 +12,7 @@ namespace hackMT.UserMgmt.model
         public string old_password {get; set; }
         public string new_password {get; set; }
         public string avatar_url {get; set; }   
+        public string api_token {get; set; }
     }
 
     public class UserCreateResponse : User{

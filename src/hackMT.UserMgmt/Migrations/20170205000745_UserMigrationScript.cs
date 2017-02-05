@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace hackMT.UserMgmt.Migrations.UserDb
+namespace hackMT.UserMgmt.Migrations
 {
-    public partial class UserDbMigration : Migration
+    public partial class UserMigrationScript : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,6 +14,7 @@ namespace hackMT.UserMgmt.Migrations.UserDb
                 {
                     user_id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
+                    api_token = table.Column<string>(nullable: true),
                     avatar_url = table.Column<string>(nullable: true),
                     email = table.Column<string>(nullable: true),
                     new_password = table.Column<string>(nullable: true),

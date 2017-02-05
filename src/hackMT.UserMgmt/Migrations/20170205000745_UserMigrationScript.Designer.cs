@@ -5,12 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using hackMT.UserMgmt;
 
-namespace hackMT.UserMgmt.Migrations.UserDb
+namespace hackMT.UserMgmt.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170205000745_UserMigrationScript")]
+    partial class UserMigrationScript
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");
@@ -19,6 +20,8 @@ namespace hackMT.UserMgmt.Migrations.UserDb
                 {
                     b.Property<int>("user_id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("api_token");
 
                     b.Property<string>("avatar_url");
 

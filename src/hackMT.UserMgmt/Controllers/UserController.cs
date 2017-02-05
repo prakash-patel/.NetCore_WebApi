@@ -28,10 +28,12 @@ namespace hackMT.UserMgmt.Controllers
         [Route("users/v1/")]
         public IActionResult Post([FromBody] User newUser)
         {
-            var users = new UserCreateResponse();
+            var users = new UserCreateResponse();          
             try {
                 if (newUser != null)
                 {
+                    Guid guid = Guid.NewGuid();
+                    newUser.api_token = guid.ToString();
                     var addUser = repo.AddUser(newUser);
                     if(addUser > 0)
                     {
@@ -44,8 +46,8 @@ namespace hackMT.UserMgmt.Controllers
                         return BadRequest(users);
                 }
             }
-            catch {
-                    users.message = "Something went wrong, please try again.";
+            catch (Exception ex){
+                    users.message = ex.InnerException.Message;
                     users.status = "failed"; 
                     return BadRequest(users);
             }
