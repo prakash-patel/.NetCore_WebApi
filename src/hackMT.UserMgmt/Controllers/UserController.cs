@@ -27,21 +27,25 @@ namespace hackMT.UserMgmt.Controllers
         [HttpGet()]
         [Route("users/v1/userName/{username}")]
         public IActionResult isValuedUser(string username){       
-         var users = new UserExistsResponse();          
-            try {
+         var users = new UserExistsResponse();
+            try
+            {
                 if (!string.IsNullOrEmpty(username))
                 {
-                    users = repo.DoesUserExist(username);            
-                }else{
+                    users = repo.DoesUserExist(username);
+                }
+                else
+                {
                     users.message = "user not found";
-                    users.status = "failed"; 
+                    users.status = "failed";
                     return BadRequest(users);
                 }
             }
-            catch {
-                    users.message = "Something went wrong, please try again.";
-                    users.status = "failed"; 
-                    return BadRequest(users);
+            catch
+            {
+                users.message = "Something went wrong, please try again.";
+                users.status = "failed";
+                return BadRequest(users);
             }
             return Ok(users);
         }
@@ -51,28 +55,32 @@ namespace hackMT.UserMgmt.Controllers
         [Route("users/v1/")]
         public IActionResult Post([FromBody] User newUser)
         {
-            var users = new UserCreateResponse();          
-            try {
-                if (newUser != null)
+            var users = new UserCreateResponse();
+            try
+            {
+                if (newUser != null && ModelState.IsValid)
                 {
                     Guid guid = Guid.NewGuid();
                     newUser.api_token = guid.ToString();
                     var addUser = repo.AddUser(newUser);
-                    if(addUser > 0)
+                    if (addUser > 0)
                     {
                         users.message = "user created.";
-                        users.status = "success";                   
+                        users.status = "success";
                     }
-                }else{
-                        users.message = "Not a valid user.";
-                        users.status = "failed"; 
-                        return BadRequest(users);
+                }
+                else
+                {
+                    users.message = "Not a valid user.";
+                    users.status = "failed";
+                    return BadRequest(users);
                 }
             }
-            catch {
-                    users.message = "Something went wrong, please try again.";
-                    users.status = "failed"; 
-                    return BadRequest(users);
+            catch
+            {
+                users.message = "Something went wrong, please try again.";
+                users.status = "failed";
+                return BadRequest(users);
             }
             return Ok(newUser);
         }
@@ -81,37 +89,41 @@ namespace hackMT.UserMgmt.Controllers
         [Route("users/v1/{id}")]
         public IActionResult Patch(int id, [FromBody] UpdateUser UserToUpdate) 
         {
-            var response = new UpdateUserResponse(); 
-            try { 
-                    if (UserToUpdate != null) 
-                    { 
-                        var updateUserId = repo.UpdateUser(id, UserToUpdate); 
-                        if(updateUserId > 0) 
-                        { 
-                            response.user_id = updateUserId; 
-                            response.message = "Password successfully changed."; 
-                            response.status = "success";                    
-                        }else{ 
-                            response.user_id = id;
-                            response.message = "Your entry for 'old password' is incorrect."; 
-                            response.status = "failed";  
-                            return BadRequest(response); 
-                        }
-                    }else{ 
-                            response.user_id = id;
-                            response.message = "Your entry for 'old password' is incorrect."; 
-                            response.status = "failed";  
-                            return BadRequest(response); 
-                    } 
-            } 
-            catch { 
-                    response.message = "Something went wrong, please try again."; 
-                    response.status = "failed";  
-                    return BadRequest(response); 
-            } 
- 
+            var response = new UpdateUserResponse();
+            try
+            {
+                if (UserToUpdate != null && ModelState.IsValid)
+                {
+                    var updateUserId = repo.UpdateUser(id, UserToUpdate);
+                    if (updateUserId > 0)
+                    {
+                        response.user_id = updateUserId;
+                        response.message = "Password successfully changed.";
+                        response.status = "success";
+                    }
+                    else
+                    {
+                        response.user_id = id;
+                        response.message = "Your entry for 'old password' is incorrect.";
+                        response.status = "failed";
+                        return BadRequest(response);
+                    }
+                }
+                else
+                {
+                    response.user_id = id;
+                    response.message = "Your entry for 'old password' is incorrect.";
+                    response.status = "failed";
+                    return BadRequest(response);
+                }
+            }
+            catch
+            {
+                response.message = "Something went wrong, please try again.";
+                response.status = "failed";
+                return BadRequest(response);
+            }
             return Ok(response); 
-
         }
 
         [HttpGet()]

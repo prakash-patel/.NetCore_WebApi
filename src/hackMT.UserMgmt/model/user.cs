@@ -6,8 +6,11 @@ namespace hackMT.UserMgmt.model
     {
         [Key]
         public int user_id { get; set; }
+        [Required]
         public string username { get; set; }
+        [Required]
         public string email { get; set; }
+        [Required]
         public string password {get; set; }
         public string old_password {get; set; }
         public string new_password {get; set; }
@@ -15,8 +18,7 @@ namespace hackMT.UserMgmt.model
         public string api_token {get; set; }
     }
 
-    public class UserCreateResponse : User{
-        
+    public class UserCreateResponse : User{       
         public string message {get; set; }
         public string status {get; set; }  
     }
