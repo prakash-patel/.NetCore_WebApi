@@ -67,5 +67,28 @@ namespace hackMT.UserMgmt.Repository
             }
         }
     }
+    public UserExistsResponse DoesUserExist(string username)
+    {
+        using (var context = new UserDbContext())
+        {
+            var UserToRemove = context.User.Where(User => User.username == username).FirstOrDefault();
+            if(UserToRemove != null){
+                return new UserExistsResponse {
+                    userExists = true,
+                    user_id = UserToRemove.user_id,
+                    message = "user found",
+                    status = "success" 
+                };
+ 
+            }else {
+                return new UserExistsResponse {
+                    userExists = false,
+                    user_id = 0,
+                    message = "user not found",
+                    status = "failed" 
+                };
+            }
+        }
+    }
 }
 }

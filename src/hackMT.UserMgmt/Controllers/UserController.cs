@@ -24,6 +24,29 @@ namespace hackMT.UserMgmt.Controllers
             return repo.GetUser(id);
         }
 
+        [HttpGet()]
+        [Route("users/v1/userName/{username}")]
+        public IActionResult isValuedUser(string username){       
+         var users = new UserExistsResponse();          
+            try {
+                if (!string.IsNullOrEmpty(username))
+                {
+                    users = repo.DoesUserExist(username);            
+                }else{
+                    users.message = "user not found";
+                    users.status = "failed"; 
+                    return BadRequest(users);
+                }
+            }
+            catch {
+                    users.message = "Something went wrong, please try again.";
+                    users.status = "failed"; 
+                    return BadRequest(users);
+            }
+            return Ok(users);
+        }
+
+
         [HttpPost()]
         [Route("users/v1/")]
         public IActionResult Post([FromBody] User newUser)
@@ -46,8 +69,8 @@ namespace hackMT.UserMgmt.Controllers
                         return BadRequest(users);
                 }
             }
-            catch (Exception ex){
-                    users.message = ex.InnerException.Message;
+            catch {
+                    users.message = "Something went wrong, please try again.";
                     users.status = "failed"; 
                     return BadRequest(users);
             }

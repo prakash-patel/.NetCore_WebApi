@@ -20,4 +20,11 @@ namespace hackMT.UserMgmt.model
         public string message {get; set; }
         public string status {get; set; }  
     }
+    public class UserExistsResponse {
+        public int user_id {get; set; }
+        public bool userExists {get; set; }
+        public string message {get; set;}
+        public string status {get; set; }  
+        
+    }
 }
