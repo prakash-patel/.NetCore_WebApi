@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using hackMT.UserMgmt.model;
+using System;
 
 namespace hackMT.UserMgmt.Repository
 {
@@ -13,12 +14,19 @@ namespace hackMT.UserMgmt.Repository
     public int AddUser(User newUser)
     {
         int UserIndex;
-        using (UserDbContext context = new UserDbContext())
-        {
-            context.User.Add(newUser);
-            context.SaveChanges();
-            UserIndex = context.User.ToList().IndexOf(newUser);
-        }
+            using (UserDbContext context = new UserDbContext())
+            {
+                var existingUer = context.User.Where(User => User.email == newUser.email).FirstOrDefault();
+                if (existingUer != null)
+                {
+                    return 0;
+                }
+                Guid guid = Guid.NewGuid();
+                newUser.api_token = guid.ToString();
+                context.User.Add(newUser);
+                context.SaveChanges();
+                UserIndex = context.User.ToList().IndexOf(newUser);
+            }
         return UserIndex;
     }
     public List<User> GetAllUsers()

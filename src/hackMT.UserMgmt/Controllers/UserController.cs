@@ -2,27 +2,42 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using hackMT.UserMgmt.Repository;
 using hackMT.UserMgmt.model;
-using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Linq;
 
 namespace hackMT.UserMgmt.Controllers
 {
+
     public class UserController : Controller
     {
         static List<User> Users = new List<User>();
         UserRepository repo = new UserRepository();
+
         [HttpGet()]
         [Route("users/v1")]
-        public List<User> GetAll()
+        public IActionResult GetAll()
         {
-            return repo.GetAllUsers();
+            try
+            {
+                return Ok(repo.GetAllUsers());
+            }
+            catch
+            {
+                return BadRequest(new { message= "Something went wrong, please try again." });
+            }
         }
 
         [HttpGet()]
         [Route("users/v1/{id}")]
-        public User GetUser(int id){
-            return repo.GetUser(id);
+        public IActionResult GetUser(int id){
+            try
+            {
+                return Ok(repo.GetUser(id));
+            }
+            catch
+            {
+                return BadRequest(new { message = "Something went wrong, please try again." });
+            }
         }
 
         [HttpGet()]
@@ -61,13 +76,17 @@ namespace hackMT.UserMgmt.Controllers
             {
                 if (newUser != null && ModelState.IsValid)
                 {
-                    Guid guid = Guid.NewGuid();
-                    newUser.api_token = guid.ToString();
                     var addUser = repo.AddUser(newUser);
                     if (addUser > 0)
                     {
                         users.message = "user created.";
                         users.status = "success";
+                    }
+                    else
+                    {
+                        users.message = "Not a valid user data.";
+                        users.status = "failed";
+                        return BadRequest(users);
                     }
                 }
                 else
@@ -101,7 +120,7 @@ namespace hackMT.UserMgmt.Controllers
                 return NotFound();
             }
             }
-            catch(Exception ex){
+            catch{
                 return BadRequest();
             }
         }
