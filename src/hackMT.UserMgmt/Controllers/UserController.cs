@@ -4,6 +4,7 @@ using hackMT.UserMgmt.Repository;
 using hackMT.UserMgmt.model;
 using Microsoft.AspNetCore.JsonPatch;
 using System;
+using System.Linq;
 
 namespace hackMT.UserMgmt.Controllers
 {
@@ -83,6 +84,26 @@ namespace hackMT.UserMgmt.Controllers
                 return BadRequest(users);
             }
             return Ok(newUser);
+        }
+
+        [HttpGet()]
+        [Route("users/v1/api_token/{api_token:guid}")]
+        public IActionResult TokenLookup(Guid api_token)
+        {
+            try{
+            var response = repo.GetAllUsers().FirstOrDefault(s => s.api_token == api_token.ToString());
+            if(response != null)
+            {
+                return Ok(response);
+            }
+            else
+            {
+                return NotFound();
+            }
+            }
+            catch(Exception ex){
+                return BadRequest();
+            }
         }
 
         [HttpPatch] 
