@@ -22,7 +22,7 @@ Unless if you want to change this version please go to `global.json` file and Ap
 
 ### See it in action
 
-Run below command at `C:\Users\pakiyabhai\Documents\Visual Studio 2015\Projects\user_management_api\src\hackMT.UserMgmt` lavel
+Run below command at `user_management_api\src\hackMT.UserMgmt` lavel
 ```
 $ dotnet restore
 $ dotnet build
