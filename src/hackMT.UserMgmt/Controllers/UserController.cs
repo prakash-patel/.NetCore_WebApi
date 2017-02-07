@@ -77,7 +77,7 @@ namespace hackMT.UserMgmt.Controllers
                 if (newUser != null && ModelState.IsValid)
                 {
                     var addUser = repo.AddUser(newUser);
-                    if (addUser > 0)
+                    if (addUser >= 0)
                     {
                         users.message = "user created.";
                         users.status = "success";

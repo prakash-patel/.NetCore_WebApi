@@ -16,10 +16,10 @@ namespace hackMT.UserMgmt.Repository
         int UserIndex;
             using (UserDbContext context = new UserDbContext())
             {
-                var existingUer = context.User.Where(User => User.email == newUser.email).FirstOrDefault();
+                var existingUer = context.User.FirstOrDefault(User => User.email == newUser.email);
                 if (existingUer != null)
                 {
-                    return 0;
+                    return -1;
                 }
                 Guid guid = Guid.NewGuid();
                 newUser.api_token = guid.ToString();
