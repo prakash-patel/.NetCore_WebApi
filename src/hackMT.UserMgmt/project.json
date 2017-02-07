@@ -1,7 +1,7 @@
 ﻿{
     "dependencies": {
         "Microsoft.NETCore.App": {
-            "version": "1.0.1",
+            "version": "1.1.0",
             "type": "platform"
         },
         "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
@@ -17,7 +17,8 @@
         "Microsoft.Extensions.Logging.Debug": "1.0.0",
         "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
         "Microsoft.EntityFrameworkCore.Design": "1.0.0-preview2-final",
-        "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0"
+        "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0",
+        "Microsoft.AspNet.JsonPatch": "1.0.0-rc1-final"
     },
 
     "tools": {
@@ -26,7 +27,7 @@
     },
 
   "frameworks": {
-    "netcoreapp1.0": {
+    "netcoreapp1.1": {
       "imports": [
         "dotnet5.6",
         "portable-net45+win8"

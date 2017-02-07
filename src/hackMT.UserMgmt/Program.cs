@@ -17,6 +17,7 @@ namespace hackMT.UserMgmt
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
+                .UseUrls("http://192.168.56.1:5000", "http://192.168.2.136:5000", "http://*:5000", "http://localhost:5000")
                 .Build();
 
             host.Run();
