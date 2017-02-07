@@ -10,7 +10,7 @@ namespace hackMT.UserMgmt
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=./UserMgmt.db");
+            optionsBuilder.UseSqlite("Filename=./../../../UserMgmt.db");
         }
     }
 }

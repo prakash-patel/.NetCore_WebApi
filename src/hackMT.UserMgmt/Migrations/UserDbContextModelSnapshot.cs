@@ -24,15 +24,18 @@ namespace hackMT.UserMgmt.Migrations
 
                     b.Property<string>("avatar_url");
 
-                    b.Property<string>("email");
+                    b.Property<string>("email")
+                        .IsRequired();
 
                     b.Property<string>("new_password");
 
                     b.Property<string>("old_password");
 
-                    b.Property<string>("password");
+                    b.Property<string>("password")
+                        .IsRequired();
 
-                    b.Property<string>("username");
+                    b.Property<string>("username")
+                        .IsRequired();
 
                     b.HasKey("user_id");
 
